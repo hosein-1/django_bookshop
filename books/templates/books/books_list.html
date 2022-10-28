@@ -1,0 +1,14 @@
+{% extends '_base.html'%}
+
+{% block page_title %}
+Books
+{% endblock page_title %}
+
+{% block content %}
+    {% for book in books %}
+
+        <h1>{{ book.title }}</h1>
+        <p>{{ book.description }}</p>
+        <img src="{{ book.cover.url }}" alt="picture">
+    {% endfor %}
+{% endblock content %}

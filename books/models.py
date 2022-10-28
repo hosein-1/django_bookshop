@@ -10,3 +10,5 @@ class Book(models.Model):
     translator = models.CharField(max_length=250, blank=True)
     cover = models.ImageField(upload_to='covers/')
 
+    def __str__(self):
+        return self.title

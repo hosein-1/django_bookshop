@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 
-class ContactUsPageTests(TestCase):
+class ContactUsPageTest(TestCase):
     def test_contact_us_page_url(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
@@ -16,7 +16,7 @@ class ContactUsPageTests(TestCase):
         self.assertTemplateUsed(response, 'pages/contact_us.html')
 
 
-class AboutUsPageTests(TestCase):
+class AboutUsPageTest(TestCase):
     def test_about_us_page_url(self):
         response = self.client.get('/about/')
         self.assertEqual(response.status_code, 200)

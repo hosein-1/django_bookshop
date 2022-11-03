@@ -14,6 +14,8 @@ class Book(models.Model):
     publisher = models.CharField(max_length=250)
     translator = models.CharField(max_length=250, blank=True)
     cover = models.ImageField(upload_to='covers/')
+    slug = models.SlugField(max_length=100)
+    category = models.ManyToManyField(Category)
 
     def __str__(self):
         return self.title

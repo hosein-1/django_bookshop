@@ -3,7 +3,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True, allow_unicode=True)
 
 
 class Book(models.Model):
@@ -14,7 +14,7 @@ class Book(models.Model):
     publisher = models.CharField(max_length=250)
     translator = models.CharField(max_length=250, blank=True)
     cover = models.ImageField(upload_to='covers/')
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(max_length=100, allow_unicode=True)
     category = models.ManyToManyField(Category)
 
     def __str__(self):

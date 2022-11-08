@@ -6,8 +6,7 @@ Books
 
 {% block content %}
     {% for book in books %}
-
-        <h1>{{ book.title }}</h1>
+        <a href="{{ book.get_absolute_url }}">لینک</a>
         <p>{{ book.description }}</p>
         <img src="{{ book.cover.url }}" alt="picture">
     {% endfor %}

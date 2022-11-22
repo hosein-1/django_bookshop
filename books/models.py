@@ -32,3 +32,6 @@ class Comment(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='comments')
     datetime_created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+
+    def get_absolute_url(self):
+        return reverse('book_detail', kwargs={'slug': self.book.slug, 'pk': self.book.id})

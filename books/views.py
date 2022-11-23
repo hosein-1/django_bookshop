@@ -1,7 +1,7 @@
 from django.views import generic
 from django.shortcuts import get_object_or_404, render
 
-from .models import Book
+from .models import Book, Comment
 from .forms import CommentForm
 
 
@@ -16,9 +16,13 @@ def book_detail_view(request, pk, slug):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            book_object = form.save(commit=False)
-            book_object.author = request.user
-            book_object.book = book
+            comment_object = form.save(commit=False)
+            comment_object.author = request.user
+            comment_object.book = book
+            try:
+                comment_object.parent = form.cleaned_data['parent']
+            except:
+                comment_object.parent = None
             form.save()
         return render(request, 'books/book_detail.html', {'form': form, 'book': book})
 

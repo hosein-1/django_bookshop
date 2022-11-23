@@ -5,5 +5,47 @@
 {% endblock page_title %}
 
 {% block content %}
+{% if user.is_authenticated %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <textarea name="text"></textarea>
+         {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+
+                         <strong>{{ error }}</strong>
+                    </div>
+           {% endfor %}
+       {% endfor %}
+    {% endif %}
+        <input type="submit" value="send">
+    </form>
+    {% else %}
+    <p>برای ارسال دیدگاه لازم است وارد شده یا ثبت‌نام کنید </p>
+{% endif %}
+      {% for comment in book.comments.all %}
+         {% if comment.is_parent %}
+         <h3> <b>{{ comment.author }} : </b> {{ comment.text }}</h3>
+         &nbsp; &nbsp; &nbsp;<form action="" method="POST">
+            <div>
+                &nbsp; &nbsp; &nbsp;<label for="comment">Reply here</label>
+               &nbsp; &nbsp; &nbsp;<input type="text" name="text" id="check"> <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} <input type="submit" value="Post"></div>
+            </div>
+         </form>
+
+         {% endif %}
+
+         {% for replies in comment.children %}
+             <h3>&nbsp; &nbsp; &nbsp; <b>{{ replies.author }} : </b> {{ replies.text }}</h3>
+             <form action="" method="POST">
+            <div>
+                &nbsp; &nbsp; &nbsp;<label for="comment">Reply here</label>
+               &nbsp; &nbsp; &nbsp;<input type="text" name="text" id="check"> <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} <input type="submit" value="Post"></div>
+            </div>
+         </form>
+         {% endfor %}
+      {% endfor %}
 
 {% endblock content %}

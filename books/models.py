@@ -1,23 +1,24 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=100, unique=True, allow_unicode=True)
+    name = models.CharField(_('Name'), max_length=200)
+    slug = models.SlugField(_('Slug'), max_length=100, unique=True, allow_unicode=True)
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=250)
-    author = models.CharField(max_length=250)
-    description = models.TextField()
-    price = models.PositiveIntegerField(default=0)
-    publisher = models.CharField(max_length=250)
-    translator = models.CharField(max_length=250, blank=True)
-    cover = models.ImageField(upload_to='covers/')
-    slug = models.SlugField(max_length=100, allow_unicode=True)
-    category = models.ManyToManyField(Category)
+    title = models.CharField(_('Title'), max_length=250)
+    author = models.CharField(_('Author'), max_length=250)
+    description = models.TextField(_('Description'))
+    price = models.PositiveIntegerField(_('Price'), default=0)
+    publisher = models.CharField(_('Publisher'), max_length=250)
+    translator = models.CharField(_('Translator'), max_length=250, blank=True)
+    cover = models.ImageField(_('Cover'), upload_to='covers/')
+    slug = models.SlugField(_('Slug'), max_length=100, allow_unicode=True)
+    category = models.ManyToManyField(Category, verbose_name=_('Category'))
 
     def __str__(self):
         return self.title
@@ -27,12 +28,20 @@ class Book(models.Model):
 
 
 class Comment(models.Model):
-    text = models.TextField()
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='comments')
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='comments')
-    datetime_created = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=True)
-    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+    text = models.TextField(_('Text'), )
+    author = models.ForeignKey(get_user_model(),
+                               on_delete=models.CASCADE,
+                               related_name='comments',
+                               verbose_name=_('Author'))
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='comments', verbose_name=_('Book'))
+    datetime_created = models.DateTimeField(_('Datetime_Created'), auto_now_add=True)
+    active = models.BooleanField(_('Active'), default=True)
+    parent = models.ForeignKey('self',
+                               null=True,
+                               blank=True,
+                               on_delete=models.CASCADE,
+                               related_name='replies',
+                               verbose_name='Parent')
 
     @property
     def children(self):

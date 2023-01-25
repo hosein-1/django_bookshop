@@ -8,9 +8,12 @@ import datetime
 
 
 class BookModelTest(TestCase):
+    book1 = None
+    book2 = None
+
     @classmethod
     def setUpTestData(cls):
-        cls.category1 = Category.objects.create(name='novel', slug='novel')
+        category1 = Category.objects.create(name='novel', slug='novel')
         cls.book1 = Book.objects.create(
             title='test title 1',
             author='hosein',
@@ -21,7 +24,7 @@ class BookModelTest(TestCase):
             cover=SimpleUploadedFile('file.jpg', b"file_content", content_type='image/jpeg'),
             slug='test-title-1',
         )
-        cls.book1.category.set([cls.category1.pk])
+        cls.book1.category.set([category1.pk])
 
         cls.book2 = Book.objects.create(
             title='test title2',
@@ -34,7 +37,7 @@ class BookModelTest(TestCase):
             slug='test-title-2',
 
         )
-        cls.book2.category.set([cls.category1.pk])
+        cls.book2.category.set([category1.pk])
 
     def test_book_model_str(self):
         expected_object_name = f'{self.book2.title} : {self.book2.author}'
@@ -49,10 +52,14 @@ class BookModelTest(TestCase):
 
 
 class CommentModelTest(TestCase):
+    book2 = None
+    user = None
+    comment1 = None
+
     @classmethod
     def setUpTestData(cls):
-        cls.category1 = Category.objects.create(name='novel', slug='novel')
-        cls.book2 = Book.objects.create(
+        category1 = Category.objects.create(name='story', slug='story')
+        book2 = Book.objects.create(
             title='test title2',
             author='ali',
             description='This is a test',
@@ -63,7 +70,7 @@ class CommentModelTest(TestCase):
             slug='test-title-2',
 
         )
-        cls.book2.category.set([cls.category1.pk])
+        book2.category.set([category1.pk])
 
         cls.user = get_user_model().objects.create(email='hosein@gmail.com')
         cls.comment1 = Comment.objects.create(

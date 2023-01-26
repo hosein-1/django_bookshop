@@ -59,7 +59,7 @@ class CommentModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         category1 = Category.objects.create(name='story', slug='story')
-        book2 = Book.objects.create(
+        cls.book2 = Book.objects.create(
             title='test title2',
             author='ali',
             description='This is a test',
@@ -70,7 +70,7 @@ class CommentModelTest(TestCase):
             slug='test-title-2',
 
         )
-        book2.category.set([category1.pk])
+        cls.book2.category.set([category1.pk])
 
         cls.user = get_user_model().objects.create(email='hosein@gmail.com')
         cls.comment1 = Comment.objects.create(

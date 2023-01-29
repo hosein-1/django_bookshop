@@ -12,7 +12,7 @@ class BookListView(generic.ListView):
 
 
 def book_detail_view(request, pk, slug):
-    book = get_object_or_404(Book, pk=pk)
+    book = get_object_or_404(Book, pk=pk, slug=slug)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():

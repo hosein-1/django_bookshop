@@ -26,7 +26,8 @@
     <p>برای ارسال دیدگاه لازم است وارد شده یا ثبت‌نام کنید </p>
 {% endif %}
       {% for comment in book.comments.all %}
-         {% if comment.is_parent %}
+          {% if comment.active %}
+           {% if comment.is_parent %}
          <h3> <b>{{ comment.author }} : </b> {{ comment.text }}</h3>
          &nbsp; &nbsp; &nbsp;<form action="" method="POST">
             <div>
@@ -36,8 +37,9 @@
          </form>
 
          {% endif %}
-
+           {% endif %}
          {% for replies in comment.children %}
+             {% if replies.active %}
              <h3>&nbsp; &nbsp; &nbsp; <b>{{ replies.author }} : </b> {{ replies.text }}</h3>
              <form action="" method="POST">
             <div>
@@ -45,7 +47,9 @@
                &nbsp; &nbsp; &nbsp;<input type="text" name="text" id="check"> <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} <input type="submit" value="Post"></div>
             </div>
          </form>
+              {% endif %}
          {% endfor %}
+
       {% endfor %}
 
 {% endblock content %}

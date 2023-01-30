@@ -47,8 +47,8 @@ class BookModelTest(TestCase):
         self.assertEqual(self.book1.slug, 'test-title-1')
 
     def test_book_model_get_absolute_url(self):
-        book = Book.objects.get(id=1)
-        self.assertEqual(book.get_absolute_url(), '/book/1/test-title-1/')
+        book = Book.objects.get(id=2)
+        self.assertEqual(book.get_absolute_url(), '/book/2/test-title-1/')
 
 
 class CommentModelTest(TestCase):

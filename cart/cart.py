@@ -53,6 +53,9 @@ class Cart:
         del self.session['cart']
         self.save()
 
+    def get_total_price(self):
+        return sum(item['quantity'] * item['book_obj'] for item in self.cart.values())
+
     def save(self):
         self.session.modified = True
 

@@ -25,6 +25,13 @@ class Cart:
 
         self.save()
 
+    def remove(self, book):
+        book_id = str(book.id)
+
+        if book_id in self.cart:
+            del self.cart[book_id]
+            self.save()
+
     def save(self):
         self.session.modified = True
 

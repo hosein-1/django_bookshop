@@ -1,5 +1,5 @@
 
-class Cart():
+class Cart:
     def __int__(self, request):
         self.request = request
         self.session = request.session
@@ -11,17 +11,17 @@ class Cart():
 
         self.cart = cart
 
-    def add(self, product, quantity=1, replace_current_quantity=False):
-        product_id = str(product.id)
+    def add(self, book, quantity=1, replace_current_quantity=False):
+        book_id = str(book.id)
 
-        if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': quantity}
+        if book_id not in self.cart:
+            self.cart[book_id] = {'quantity': quantity}
 
         if replace_current_quantity:
-            self.cart[product_id]['quantity'] = quantity
+            self.cart[book_id]['quantity'] = quantity
 
         else:
-            self.cart[product_id]['quantity'] += quantity
+            self.cart[book_id]['quantity'] += quantity
 
         self.save()
 

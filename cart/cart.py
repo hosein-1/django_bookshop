@@ -17,7 +17,7 @@ class Cart:
         book_id = str(book.id)
 
         if book_id not in self.cart:
-            self.cart[book_id] = {'quantity': quantity}
+            self.cart[book_id] = {'quantity': 0}
 
         if replace_current_quantity:
             self.cart[book_id]['quantity'] = quantity

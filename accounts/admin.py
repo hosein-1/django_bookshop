@@ -10,3 +10,6 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {'fields': ('avatar', 'bio',)}),
+    )

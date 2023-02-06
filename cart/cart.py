@@ -3,7 +3,7 @@ from books.models import Book
 
 class Cart:
     """This class is made for cart system in this site."""
-    def __int__(self, request):
+    def __init__(self, request):
         self.request = request
         self.session = request.session
 
@@ -43,7 +43,7 @@ class Cart:
         """This function returns all the values in the shopping cart."""
         book_ids = self.cart.keys()
 
-        books = Book.objects.get(id__in=book_ids)
+        books = Book.objects.filter(id__in=book_ids)
         cart = self.cart.copy()
 
         for book in books:
@@ -67,4 +67,3 @@ class Cart:
 
     def save(self):
         self.session.modified = True
-

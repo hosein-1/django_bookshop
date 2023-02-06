@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+Cart Detail
+{% endblock page_title %}
+
+{% block content %}
+    {% for item in cart %}
+        {{ item.book_obj.author }}
+        <a href="{% url 'cart:cart_remove' item.book_obj.id%}">این را حذف کن</a>
+    {% endfor %}
+{% endblock content %}

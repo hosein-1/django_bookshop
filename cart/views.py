@@ -20,3 +20,10 @@ def add_to_cart_view(request, book_id):
         quantity = cleaned_data['quantity']
         cart.add(book, quantity)
     return redirect('cart:cart_detail')
+
+
+def remove_specific_book_from_cart(request, book_id):
+    cart = Cart(request)
+    book = get_object_or_404(Book, id=book_id)
+    cart.remove(book)
+    return redirect('cart:cart_detail')

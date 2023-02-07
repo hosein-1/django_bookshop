@@ -50,6 +50,7 @@ class Cart:
             cart[str(book.id)]['book_obj'] = book
 
         for item in cart.values():
+            item['total_price'] = item['book_obj'].price * item['quantity']
             yield item
 
     def __len__(self):

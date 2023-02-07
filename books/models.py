@@ -21,10 +21,10 @@ class Book(models.Model):
     category = models.ManyToManyField(Category, verbose_name=_('Category'))
 
     def __str__(self):
-        return self.title
+        return f'{self.title} : {self.author}'
 
     def get_absolute_url(self):
-        return reverse('book_detail', kwargs={'slug': self.slug, 'pk': self.id})
+        return reverse('books:book_detail', kwargs={'slug': self.slug, 'pk': self.id})
 
 
 class Comment(models.Model):
@@ -52,6 +52,9 @@ class Comment(models.Model):
         if self.parent is None:
             return True
         return False
+
+    def __str__(self):
+        return f'{self.author}'
 
     def get_absolute_url(self):
         return reverse('book_detail', kwargs={'slug': self.book.slug, 'pk': self.book.id})

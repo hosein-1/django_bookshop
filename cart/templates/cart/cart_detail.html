@@ -9,4 +9,10 @@ Cart Detail
         {{ item.book_obj.author }}
         <a href="{% url 'cart:cart_remove' item.book_obj.id%}">این را حذف کن</a>
     {% endfor %}
+    <div>
+        <form action="{% url 'cart:cart_clear' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Empty cart">
+        </form>
+    </div>
 {% endblock content %}

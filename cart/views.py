@@ -8,6 +8,11 @@ from .forms import AddToCartBookForm
 
 def cart_detail_view(request):
     cart = Cart(request)
+    for item in cart:
+        item['book_update_quantity'] = AddToCartBookForm(initial={
+            'quantity': item['quantity'],
+            'inplace': True,
+        })
     return render(request, 'cart/cart_detail.html', {'cart': cart})
 
 
@@ -20,7 +25,7 @@ def add_to_cart_view(request, book_id):
     if form.is_valid():
         cleaned_data = form.cleaned_data
         quantity = cleaned_data['quantity']
-        cart.add(book, quantity)
+        cart.add(book, quantity, replace_current_quantity=cleaned_data['inplace'])
     return redirect('cart:cart_detail')
 
 

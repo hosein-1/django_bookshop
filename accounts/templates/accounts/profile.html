@@ -1,0 +1,15 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+    Profile
+{% endblock page_title %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+
+        <input type="submit">
+    </form>
+<img src="{{ user.avatar.url }}" alt="">
+{% endblock content %}

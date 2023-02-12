@@ -12,7 +12,7 @@ class Order(models.Model):
     last_name = models.CharField(_('Last_name'), max_length=100)
     phone_number = PhoneNumberField(_('Phone_Number'))
     address = models.CharField(_('Address'), max_length=800)
-    order_notes = models.CharField(_('Notes'), max_length=800)
+    order_notes = models.CharField(_('Notes'), max_length=800, blank=True)
     is_paid = models.BooleanField(default=False)
     datetime_created = models.DateTimeField(auto_now=True)
     datetime_modified = models.DateTimeField(auto_now_add=True)

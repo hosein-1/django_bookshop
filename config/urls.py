@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('', include('books.urls')),
     path('cart/', include('cart.urls')),
+    path('order/', include('orders.urls')),
 
     # i18N
     path('rosetta/', include('rosetta.urls')),

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'pages',
     'cart',
     'orders',
+    'payment',
 ]
 
 SITE_ID = 1
@@ -159,8 +160,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # accounts app config
 AUTH_USER_MODEL = 'accounts.CustomUser'
-LOGIN_REDIRECT_URL = 'book_list'
-LOGOUT_REDIRECT_URL = 'book_list'
+LOGIN_REDIRECT_URL = 'books:book_list'
+LOGOUT_REDIRECT_URL = 'books:book_list'
 
 # allauth settings
 ACCOUNT_AUTHENTICATION_METHOD = 'email'

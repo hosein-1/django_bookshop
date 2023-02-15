@@ -9,5 +9,38 @@ Books
         <a href="{{ book.get_absolute_url }}">لینک</a>
         <p>{{ book.description }}</p>
         <img src="{{ book.cover.url }}" alt="picture">
-    {% endfor %}
+
+    {% if user.is_authenticated %}
+        <img src="{{ user.avatar.url }}">
+        {{ user.bio }}
+        <a href=""></a>
+    {% endif %}
+    <form action="{% url 'cart:cart_add' book.id %}" method="POST">
+        {% csrf_token %}
+             <div class="counter">
+      <span class="down" onClick='decreaseCount(event, this)'>-</span>
+      <input type="text" value="1" name="quantity">
+      <span class="up"  onClick='increaseCount(event, this)'>+</span>
+    </div>
+        <button type="submit" class="btn btn-small btn-bg-red btn-color-white btn-hover-2">ADD</button>
+    </form>
+        {% endfor %}
+    <script type="text/javascript">
+      function increaseCount(a, b) {
+        var input = b.previousElementSibling;
+        var value = parseInt(input.value, 10);
+        value = isNaN(value)? 0 : value;
+        value ++;
+        input.value = value;
+      }
+      function decreaseCount(a, b) {
+        var input = b.nextElementSibling;
+        var value = parseInt(input.value, 10);
+        if (value > 1) {
+          value = isNaN(value)? 0 : value;
+          value --;
+          input.value = value;
+        }
+      }
+    </script>
 {% endblock content %}

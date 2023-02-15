@@ -26,6 +26,10 @@ Cart Detail
             <input type="submit" value="Empty cart">
         </form>
     </div>
+
+    <div>
+        <a href="{% url 'orders:order_create' %}">Checkout</a>
+    </div>
         <script type="text/javascript">
       function increaseCount(a, b) {
         var input = b.previousElementSibling;

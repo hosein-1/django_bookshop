@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'rosetta',
     'phonenumber_field',
+    'jalali_date',
 
     # local apps
     'accounts',

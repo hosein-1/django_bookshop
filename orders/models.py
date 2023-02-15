@@ -16,6 +16,9 @@ class Order(models.Model):
     is_paid = models.BooleanField(default=False)
     datetime_created = models.DateTimeField(auto_now=True)
     datetime_modified = models.DateTimeField(auto_now_add=True)
+    zarinpal_authority = models.CharField(max_length=255, blank=True)
+    zarinpal_ref_id = models.CharField(max_length=150, blank=True)
+    zarinpal_data = models.TextField(blank=True)
 
     def __str__(self):
         return f'Order {self.id} : {self.first_name} {self.last_name} {self.is_paid}'

@@ -29,24 +29,27 @@
           {% if comment.active %}
            {% if comment.is_parent %}
          <h3> <b>{{ comment.author }} : </b> {{ comment.text }}</h3>
+               {% if user.is_authenticated %}
          &nbsp; &nbsp; &nbsp;<form action="" method="POST">
             <div>
                 &nbsp; &nbsp; &nbsp;<label for="comment">Reply here</label>
                &nbsp; &nbsp; &nbsp;<input type="text" name="text" id="check"> <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} <input type="submit" value="Post"></div>
             </div>
          </form>
-
+            {% endif %}
          {% endif %}
            {% endif %}
          {% for replies in comment.children %}
              {% if replies.active %}
              <h3>&nbsp; &nbsp; &nbsp; <b>{{ replies.author }} : </b> {{ replies.text }}</h3>
+              {% if user.is_authenticated %}
              <form action="" method="POST">
             <div>
                 &nbsp; &nbsp; &nbsp;<label for="comment">Reply here</label>
                &nbsp; &nbsp; &nbsp;<input type="text" name="text" id="check"> <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} <input type="submit" value="Post"></div>
             </div>
          </form>
+           {% endif %}
               {% endif %}
          {% endfor %}
 

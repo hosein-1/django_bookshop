@@ -5,6 +5,10 @@ Order Create
 {% endblock page_title %}
 
 {% block content %}
-    {{ order_form }}
+    <form action="" method="POST">
+        {% csrf_token %}
+     {{ order_form }}
     <input type="submit" value="checkout">
+    </form>
+
 {% endblock content %}

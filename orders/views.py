@@ -21,7 +21,7 @@ def create_order(request):
             order_object.save()
 
             for item in cart:
-                book = item['book_object']
+                book = item['book_obj']
                 OrderItem.objects.create(
                     order=order_object,
                     book=book,

@@ -1,5 +1,6 @@
 from django.views import generic
 from django.shortcuts import get_object_or_404, render
+from django.db.models import Q
 
 from .models import Book, Comment
 from .forms import CommentForm
@@ -29,3 +30,15 @@ def book_detail_view(request, pk, slug):
     else:
         form = CommentForm()
         return render(request, 'books/book_detail.html', {'form': form, 'book': book})
+
+
+class SearchResultView(generic.ListView):
+    model = Book
+    template_name = 'books/book_search_list.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Book.objects.filter(
+            Q(title__icontains=query) | Q(author__icontains=query) | Q(publisher__icontains=query)
+        )
+        return object_list

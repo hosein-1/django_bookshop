@@ -5,16 +5,16 @@ Books
 {% endblock page_title %}
 
 {% block content %}
+    <form action="{% url 'books:search' %}" method="GET">
+        <input name="q" type="text" placeholder="Search...">
+        <button>search</button>
+    </form>
     {% for book in books %}
         <a href="{{ book.get_absolute_url }}">لینک</a>
         <p>{{ book.description }}</p>
         <img src="{{ book.cover.url }}" alt="picture">
 
-    {% if user.is_authenticated %}
-        <img src="{{ user.avatar.url }}">
-        {{ user.bio }}
-        <a href=""></a>
-    {% endif %}
+
     <form action="{% url 'cart:cart_add' book.id %}" method="POST">
         {% csrf_token %}
              <div class="counter">
@@ -25,6 +25,11 @@ Books
         <button type="submit" class="btn btn-small btn-bg-red btn-color-white btn-hover-2">ADD</button>
     </form>
         {% endfor %}
+       {% if user.is_authenticated %}
+        <img src="{{ user.avatar.url }}">
+        {{ user.bio }}
+        <a href=""></a>
+    {% endif %}
     <script type="text/javascript">
       function increaseCount(a, b) {
         var input = b.previousElementSibling;

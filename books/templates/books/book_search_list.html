@@ -1,0 +1,10 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+ search
+{% endblock page_title %}
+{% block content %}
+    {% for object in object_list %}
+        <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+    {% endfor %}
+{% endblock content %}
